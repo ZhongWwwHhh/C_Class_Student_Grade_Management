@@ -3,6 +3,6 @@
 
 #include "type_define.h"
 
-int menu_read_file(Student *Stu);
+int menu_read_file(Student **Stu);
 
 #endif

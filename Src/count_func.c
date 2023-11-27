@@ -2,15 +2,16 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 // count everyone's grade and return average
-float Count_grade(Student pStu[], int num)
+float Count_grade(Student **pStu, int num)
 {
     long grade_sum = 0;
     for (int i = 0; i < num; i++)
     {
-        pStu[i].grade_sum = pStu[i].grade_ex + pStu[i].grade_hf;
-        grade_sum += pStu[i].grade_sum;
+        (*pStu)[i].grade_sum = (*pStu)[i].grade_ex + (*pStu)[i].grade_hf;
+        grade_sum += (*pStu)[i].grade_sum;
     }
     return (float)grade_sum / (float)num;
 }

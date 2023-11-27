@@ -7,18 +7,13 @@
 #include <stdio.h>
 #include <io.h>
 
-int menu_read_file(Student *Stu)
+int menu_read_file(Student **Stu)
 {
 PRINT_MENU_READFILE:
     // get file path
-    char path[255] = {0};
+    char path[256] = {0};
     puts(CLOUR_ON "Please input file or folder path(entire path): " CLOUR_OFF);
-    if (1 != scanf_s("$s", path, 254))
-    {
-        puts(ERROR_INPUT);
-        goto PRINT_MENU_READFILE;
-        return -1;
-    }
+    scanf_s("%s", path, 255);
 
     int res = ReadStudentInfo(path, Stu);
 

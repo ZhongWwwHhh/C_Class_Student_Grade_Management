@@ -1,16 +1,21 @@
 #include <stdio.h>
 #include <stdint.h>
+#include <stdlib.h>
 
 #include "main.h"
 
+#include "type_define.h"
 #include "file.h"
 #include "count_func.h"
 #include "menu_func.h"
 
-Student *Student_Data;
+Student **Student_Data;
 
 int main()
 {
+    // malloc
+    Student_Data = (Student **)malloc(sizeof(Student *));
+
     // title
     puts(CLOUR_ON "Student Performance Management System" CLOUR_OFF);
     puts("");
@@ -35,7 +40,7 @@ PRINT_MENU:
     switch (choose)
     {
     case 1:
-        menu_read_file(Student_Data);
+        int res = menu_read_file(Student_Data);
         break;
 
     case 2:
@@ -48,6 +53,10 @@ PRINT_MENU:
         goto PRINT_MENU;
         break;
     }
+
+    // free all malloc
+    free(*Student_Data);
+    free(Student_Data);
 
     return 0;
 }
