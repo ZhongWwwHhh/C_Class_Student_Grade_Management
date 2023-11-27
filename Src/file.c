@@ -1,10 +1,12 @@
 #include "file.h"
 
+#include "main.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 
-// >0 success -1 error
-int ReadStudentInfo(const char *filename, Student **pStudents)
+// >0 success <0 error
+int ReadStudentInfo(const char *filename, Student *Stu)
 {
     FILE *file = NULL;
     file = fopen(filename, "r");
@@ -19,7 +21,7 @@ int ReadStudentInfo(const char *filename, Student **pStudents)
     char file_read_buf[64];
 
     // malloc
-    *pStudents = (Student *)malloc(sizeof(Student) * num_count);
+    Stu = (Student *)malloc(sizeof(Student) * num_count);
 
     // first reading, get num_count, check
     for (; num_count < 999999; num_count++)
@@ -31,35 +33,35 @@ int ReadStudentInfo(const char *filename, Student **pStudents)
         }
 
         if (5 != fscanf(file, "%s %s %d %d %d",
-                        (*pStudents)[0].name, (*pStudents)[0].id,
-                        (*pStudents)[0].grade_ex, (*pStudents)[0].grade_hf,
-                        (*pStudents)[0].grade_sum))
+                        (Stu)[0].name, (Stu)[0].id,
+                        (Stu)[0].grade_ex, (Stu)[0].grade_hf,
+                        (Stu)[0].grade_sum))
         {
             // struct error
-            printf("Data struct error. At line %d\n", num_count + 1);
-            return -1;
+            printf(CLOUR_ON "Data struct error. At line %d\n" CLOUR_OFF, num_count + 1);
+            return -2;
         }
 
-        if ((*pStudents)[0].grade_ex < 0 || (*pStudents)[0].grade_ex > 100 ||
-            (*pStudents)[0].grade_hf < 0 || (*pStudents)[0].grade_hf > 100 ||
-            (*pStudents)[0].grade_sum < 0 || (*pStudents)[0].grade_sum > 100)
+        if ((Stu)[0].grade_ex < 0 || (Stu)[0].grade_ex > 100 ||
+            (Stu)[0].grade_hf < 0 || (Stu)[0].grade_hf > 100 ||
+            (Stu)[0].grade_sum < 0 || (Stu)[0].grade_sum > 100)
         {
             // beyound normal range
-            printf("Data out of range. At line %d\n", num_count + 1);
-            return -1;
+            printf(CLOUR_ON "Data out of range. At line %d\n" CLOUR_OFF, num_count + 1);
+            return -3;
         }
     }
 
     // realloc
-    *pStudents = (Student *)realloc(*pStudents, sizeof(Student) * num_count);
+    Stu = (Student *)realloc(Stu, sizeof(Student) * num_count);
 
     // second reading, get value
     for (int i = 0; i < num_count; i++)
     {
         fscanf(file, "%s %s %d %d %d",
-               (*pStudents)[i].name, (*pStudents)[i].id,
-               (*pStudents)[i].grade_ex, (*pStudents)[i].grade_hf,
-               (*pStudents)[i].grade_sum);
+               (Stu)[i].name, (Stu)[i].id,
+               (Stu)[i].grade_ex, (Stu)[i].grade_hf,
+               (Stu)[i].grade_sum);
     }
 
     return num_count;
