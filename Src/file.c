@@ -2,8 +2,18 @@
 
 #include "main.h"
 
-#include <stdio.h>
-#include <stdlib.h>
+void print_line(const char *name, const char *id, const int grade_ex, const int grade_hf, const int grade_sum, const uint8_t is_file, FILE **file)
+{
+    if (!is_file)
+    {
+        printf("%s\t%13s %3d %3d %3d\n", name, id, grade_ex, grade_hf, grade_sum);
+    }
+    else
+    {
+        fprintf(*file, "%s\t%13s %3d %3d %3d\n", name, id, grade_ex, grade_hf, grade_sum);
+    }
+    return;
+}
 
 // read a file, return > 0 success means count of line / return < 0 means fail with reason output
 int ReadStudentInfo(const char *filename, Student **Stu)
@@ -76,11 +86,39 @@ int ReadStudentInfo(const char *filename, Student **Stu)
                (*Stu)[i].name, (*Stu)[i].id,
                &(*Stu)[i].grade_ex, &(*Stu)[i].grade_hf,
                &(*Stu)[i].grade_sum);
-        printf("%s %s %d %d %d\n", (*Stu)[i].name, (*Stu)[i].id, (*Stu)[i].grade_ex, (*Stu)[i].grade_hf, (*Stu)[i].grade_sum);
+        print_line((*Stu)[i].name, (*Stu)[i].id, (*Stu)[i].grade_ex, (*Stu)[i].grade_hf, (*Stu)[i].grade_sum, 0, NULL);
     }
 
     // release file
     fclose(file);
 
     return num_count;
+}
+
+int WriteClassInfo(const Student *Stu, const uint32_t Stu_num, const char *class_name, const float average, const char *filename)
+{
+    FILE *file = NULL;
+    file = fopen(filename, "a");
+
+    if (NULL == file)
+    {
+        // can't open file
+        puts(CLOUR_ON "CAN'T OPEN" CLOUR_OFF);
+        return -1;
+    }
+
+    fprintf(file, "Result of class %s:\n----------\n", class_name);
+
+    for (uint32_t i = 0; i < Stu_num; i++)
+    {
+        print_line(Stu->name, Stu->id, Stu->grade_hf, Stu->grade_ex, Stu->grade_sum, 1, &file);
+    }
+
+    fputs("----------\n", file);
+
+    fprintf(file, "average grade: %f", average);
+
+    fclose(file);
+
+    return 0;
 }
