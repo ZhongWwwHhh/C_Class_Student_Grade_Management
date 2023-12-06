@@ -16,7 +16,7 @@ float Count_grade(Student **pStu, int num)
     return (float)grade_sum / (float)num;
 }
 
-// combine students from two data
+// combine students from two data, retrun Student *Stu_combined
 Student *Combine(const Student *Stu1, const Student *Stu2, int n1, int n2)
 {
     // pointer to save combined data
@@ -26,15 +26,12 @@ Student *Combine(const Student *Stu1, const Student *Stu2, int n1, int n2)
     // copy data into new pointer
     for (int i = 0; i < n1; i++)
     {
-        *Stu_combined = Stu1[i];
-        Stu_combined++;
+        Stu_combined[i] = Stu1[i];
     }
     for (int i = 0; i < n2; i++)
     {
-        *Stu_combined = Stu2[i];
-        Stu_combined++;
+        Stu_combined[n1 + i] = Stu2[i];
     }
-    Stu_combined -= n1 + n2;
 
     return Stu_combined;
 }
