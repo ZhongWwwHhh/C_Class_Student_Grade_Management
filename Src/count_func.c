@@ -54,7 +54,7 @@ Student *Split(const Student *Stu, int n, char *class, int n_class)
             Stu_split++;
         }
     }
-    Stu_split -= i;
+    Stu_split -= n_class;
 
     return Stu_split;
 }
