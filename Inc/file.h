@@ -11,6 +11,6 @@ void print_line(const char *name, const char *id, const int grade_ex, const int 
 
 int ReadStudentInfo(const char *filename, Student **pStudents);
 
-int WriteClassInfo(const Student *Stu, const uint32_t Stu_num, const char *class_name, const float average, const char *filename);
+int WriteClassInfo(const Student *Stu, const uint32_t Stu_num, const char *class_name, const float average, const char *filename, int8_t need_detail);
 
 #endif

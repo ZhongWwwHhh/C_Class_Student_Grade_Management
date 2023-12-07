@@ -54,6 +54,8 @@ PRINT_MENU:
 
     case 3:
         // count all
+        menu_count_all(Student_Data, Stu_num);
+        goto PRINT_MENU;
         break;
 
     case 0:

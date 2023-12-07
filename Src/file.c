@@ -95,7 +95,7 @@ int ReadStudentInfo(const char *filename, Student **Stu)
     return num_count;
 }
 
-int WriteClassInfo(const Student *Stu, const uint32_t Stu_num, const char *class_name, const float average, const char *filename)
+int WriteClassInfo(const Student *Stu, const uint32_t Stu_num, const char *class_name, const float average, const char *filename, int8_t need_detail)
 {
     FILE *file = NULL;
     file = fopen(filename, "a");
@@ -103,20 +103,25 @@ int WriteClassInfo(const Student *Stu, const uint32_t Stu_num, const char *class
     if (NULL == file)
     {
         // can't open file
-        puts(CLOUR_ON "CAN'T OPEN" CLOUR_OFF);
+        puts(CLOUR_ON "CAN'T OPEN FILE" CLOUR_OFF);
         return -1;
     }
 
-    fprintf(file, "Result of class %s:\n----------\n", class_name);
+    fprintf(file, "Result of class %s: ", class_name);
 
-    for (uint32_t i = 0; i < Stu_num; i++)
+    if (need_detail)
     {
-        print_line(Stu->name, Stu->id, Stu->grade_hf, Stu->grade_ex, Stu->grade_sum, 1, &file);
+        fprintf(file, "\n----------\n");
+        for (uint32_t i = 0; i < Stu_num; i++)
+        {
+            print_line(Stu->name, Stu->id, Stu->grade_hf, Stu->grade_ex, Stu->grade_sum, 1, &file);
+        }
+        fputs("----------", file);
     }
 
-    fputs("----------\n", file);
+    fprintf(file, "average grade: %.4f", average);
 
-    fprintf(file, "average grade: %f", average);
+    fputs("\n", file);
 
     fclose(file);
 

@@ -95,10 +95,87 @@ int menu_count_class(const Student *Stu, const uint32_t Stu_num)
     char filename[256] = {0};
     strcat(filename, class_name);
     strcat(filename, ".txt");
-    WriteClassInfo(Stu_temp, (uint32_t)class_num, class_name, average, filename);
+    if (0 > WriteClassInfo(Stu_temp, (uint32_t)class_num, class_name, average, filename, 1))
+    {
+        return -3;
+    }
 
     // free Stu_temp
     free(Stu_temp);
     Stu_temp = NULL;
+    return 0;
+}
+
+int menu_count_all(const Student *Stu, const uint32_t Stu_num)
+{
+    // get all class names
+    char class_names[256][16] = {0};
+    int8_t is_same = 0;
+    uint8_t class_num_count = 0;
+    for (uint32_t i = 0; i < Stu_num; i++)
+    {
+        for (uint16_t j = 0; j < 256; j++)
+        {
+            if (strncmp(Stu[i].id, class_names[j], 10) == 0)
+            {
+                is_same = 1;
+            }
+        }
+        if (!is_same)
+        {
+            for (uint8_t k = 0; k < 16; k++)
+            {
+                class_names[class_num_count][k] = Stu[i].id[k];
+            }
+            class_num_count++;
+            if (class_num_count == 255)
+            {
+                // print error
+                puts(CLOUR_ON "TOO MANY CLASS" CLOUR_OFF);
+                return -1;
+            }
+        }
+    }
+
+    // record average for each class
+    float averages[256] = {0};
+
+    for (uint8_t i = 0; i < class_num_count; i++)
+    {
+        // spilt one of class name
+        // num of students in class
+        char *class_name = class_names[i];
+        int class_num = Count_num(Stu, Stu_num, class_name);
+
+        // split data
+        Student *Stu_temp = Split(Stu, Stu_num, class_name, class_num);
+
+        // countdata
+        averages[i] = Count_grade(&Stu_temp, class_num);
+
+        // release
+        free(Stu_temp);
+        Stu_temp = NULL;
+    }
+
+    // print result
+    printf("Reault of %d class:\n----------\n", (int)class_num_count);
+    puts("class_name\t\taverage");
+    for (uint8_t i = 0; i < class_num_count; i++)
+    {
+        printf("%s\t\t%f\n", class_names[i], averages[i]);
+    }
+    puts("----------");
+
+    // write result
+    for (uint8_t i = 0; i < class_num_count; i++)
+    {
+        if (0 > WriteClassInfo(NULL, 0, class_names[i], averages[i], "all.txt", 0))
+        {
+            // write file error
+            return -3;
+        }
+    }
+
     return 0;
 }
