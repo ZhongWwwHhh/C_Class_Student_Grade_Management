@@ -114,7 +114,7 @@ int WriteClassInfo(const Student *Stu, const uint32_t Stu_num, const char *class
         fprintf(file, "\n----------\n");
         for (uint32_t i = 0; i < Stu_num; i++)
         {
-            print_line(Stu->name, Stu->id, Stu->grade_hf, Stu->grade_ex, Stu->grade_sum, 1, &file);
+            print_line(Stu[i].name, Stu[i].id, Stu[i].grade_hf, Stu[i].grade_ex, Stu[i].grade_sum, 1, &file);
         }
         fputs("----------", file);
     }

@@ -87,7 +87,7 @@ int menu_count_class(const Student *Stu, const uint32_t Stu_num)
     printf("Result of class %s:\n----------\n", class_name);
     for (int i = 0; i < class_num; i++)
     {
-        print_line(Stu_temp->name, Stu_temp->id, Stu_temp->grade_hf, Stu_temp->grade_ex, Stu_temp->grade_sum, 0, NULL);
+        print_line(Stu_temp[i].name, Stu_temp[i].id, Stu_temp[i].grade_hf, Stu_temp[i].grade_ex, Stu_temp[i].grade_sum, 0, NULL);
     }
     printf("----------\n");
 
@@ -159,7 +159,7 @@ int menu_count_all(const Student *Stu, const uint32_t Stu_num)
     }
 
     // print result
-    printf("Reault of %d class:\n----------\n", (int)class_num_count);
+    printf("Result of %d class:\n----------\n", (int)class_num_count);
     puts("class_name\t\taverage");
     for (uint8_t i = 0; i < class_num_count; i++)
     {

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
+#include <locale.h>
 
 #include "main.h"
 
@@ -11,7 +12,9 @@
 
 int main()
 {
-    Student *Student_Data;
+    setlocale(LC_ALL, "zh_CN.UTF-8");
+
+    Student *Student_Data = NULL;
     uint32_t Stu_num = 0;
 
     // title
@@ -73,6 +76,7 @@ PRINT_MENU:
 QUIT:
     // free all malloc
     free(Student_Data);
+    Student_Data = NULL;
 
     // say goodbye
     puts("Bye");
