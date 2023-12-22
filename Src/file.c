@@ -56,7 +56,7 @@ int ReadStudentInfo(const char *filename, Student **Stu)
     // first reading, get num_count, check
     for (; num_count < 10240; num_count++)
     {
-        int res = fscanf_s(file, "%s %s %d %d %d", (*Stu)->name, sizeof((*Stu)->name), (*Stu)->id, sizeof((*Stu)->id), &(*Stu)->grade_hf, &(*Stu)->grade_ex, &(*Stu)->grade_sum);
+        int res = fscanf_s(file, "%s %s %d %d %d", (*Stu)->name, sizeof((*Stu)->name), (*Stu)->id, sizeof((*Stu)->id), &(*Stu)->grade_ex, &(*Stu)->grade_hf, &(*Stu)->grade_sum);
 
         // imnormal line
         if (5 != res)
@@ -149,7 +149,7 @@ int WriteClassInfo(const Student *Stu, const uint32_t Stu_num, const char *class
         fprintf(file, "\n----------\n");
         for (uint32_t i = 0; i < Stu_num; i++)
         {
-            print_line(Stu[i].name, Stu[i].id, Stu[i].grade_hf, Stu[i].grade_ex, Stu[i].grade_sum, 1, &file);
+            print_line(Stu[i].name, Stu[i].id, Stu[i].grade_ex, Stu[i].grade_hf, Stu[i].grade_sum, 1, &file);
         }
         fputs("----------\n", file);
     }

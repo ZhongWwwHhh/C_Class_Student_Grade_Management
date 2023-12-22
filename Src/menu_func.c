@@ -102,7 +102,7 @@ int menu_count_class(const Student *Stu, const uint32_t Stu_num)
     printf("Result of class %s:\n----------\n", class_name);
     for (int i = 0; i < class_num; i++)
     {
-        print_line(Stu_temp[i].name, Stu_temp[i].id, Stu_temp[i].grade_hf, Stu_temp[i].grade_ex, Stu_temp[i].grade_sum, 0, NULL);
+        print_line(Stu_temp[i].name, Stu_temp[i].id, Stu_temp[i].grade_ex, Stu_temp[i].grade_hf, Stu_temp[i].grade_sum, 0, NULL);
     }
     printf("----------\n");
 
