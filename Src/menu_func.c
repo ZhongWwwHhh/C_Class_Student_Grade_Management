@@ -9,6 +9,13 @@
 #include <string.h>
 #include <io.h>
 
+/**
+ * Reads student data from a file and stores it in the Stu array.
+ *
+ * @param Stu A pointer to the array of Student structures.
+ * @param Stu_num A pointer to the number of students in Student structures.
+ * @return 0 if success.
+ */
 int menu_read_file(Student **Stu, uint32_t *Stu_num)
 {
 PRINT_MENU_READFILE:
@@ -52,6 +59,13 @@ PRINT_MENU_READFILE:
     return -2;
 }
 
+/**
+ * Counts students in a class.
+ *
+ * @param Stu      Pointer to the array of Student structures.
+ * @param Stu_num  Total number of students in the class.
+ * @return         0 if success.
+ */
 int menu_count_class(const Student *Stu, const uint32_t Stu_num)
 {
     // get class name
@@ -107,6 +121,13 @@ int menu_count_class(const Student *Stu, const uint32_t Stu_num)
     return 0;
 }
 
+/**
+ * Counts all of students in the given array.
+ *
+ * @param Stu The array of Student objects.
+ * @param Stu_num The number of students in the array.
+ * @return 0 if success.
+ */
 int menu_count_all(const Student *Stu, const uint32_t Stu_num)
 {
     // get all class names

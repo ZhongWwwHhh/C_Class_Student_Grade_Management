@@ -4,7 +4,13 @@
 #include <string.h>
 #include <stdio.h>
 
-// count everyone's grade and return average
+/**
+ * Calculates the average grade for a given array of Student pointers.
+ *
+ * @param pStu A pointer to an array of Student pointers.
+ * @param num The number of elements in the array.
+ * @return The average grade as a floating-point value.
+ */
 float Count_grade(Student **pStu, int num)
 {
     long grade_sum = 0;
@@ -16,7 +22,15 @@ float Count_grade(Student **pStu, int num)
     return (float)grade_sum / (float)num;
 }
 
-// combine students from two data, retrun Student *Stu_combined
+/**
+ * Combines two arrays of Student objects into a single array.
+ *
+ * @param Stu1 Pointer to the first array of Student objects.
+ * @param Stu2 Pointer to the second array of Student objects.
+ * @param n1   Number of elements in the first array.
+ * @param n2   Number of elements in the second array.
+ * @return     Pointer to the combined array of Student objects.
+ */
 Student *Combine(const Student *Stu1, const Student *Stu2, int n1, int n2)
 {
     // pointer to save combined data
@@ -36,7 +50,15 @@ Student *Combine(const Student *Stu1, const Student *Stu2, int n1, int n2)
     return Stu_combined;
 }
 
-// split students from same class
+/**
+ * Splits the given array of students into multiple classes based on the provided class name.
+ *
+ * @param Stu The array of students to be split.
+ * @param n The number of students in the array.
+ * @param class The name of the class to split the students into.
+ * @param n_class The number of students in class.
+ * @return A pointer to the newly created array of students for the specified class.
+ */
 Student *Split(const Student *Stu, int n, char *class, int n_class)
 {
 
@@ -59,7 +81,14 @@ Student *Split(const Student *Stu, int n, char *class, int n_class)
     return Stu_split;
 }
 
-// number of students from same class in *Stu
+/**
+ * Counts the number of students in a given class.
+ *
+ * @param Stu Pointer to an array of Student structures.
+ * @param n Number of elements in the Stu array.
+ * @param class Name of the class to count students from.
+ * @return The number of students in the specified class.
+ */
 int Count_num(const Student *Stu, int n, char *class)
 {
     int count = 0;

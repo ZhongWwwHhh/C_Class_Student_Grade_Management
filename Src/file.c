@@ -2,6 +2,17 @@
 
 #include "main.h"
 
+/**
+ * Prints a line of student information.
+ *
+ * @param name The name of the student.
+ * @param id The ID of the student.
+ * @param grade_ex The grade of the student in the experiment.
+ * @param grade_hf The grade of the student in the half exam.
+ * @param grade_sum The total grade of the student.
+ * @param is_file Flag indicating whether to print to a file.
+ * @param file Pointer to the file to print to (if is_file is true).
+ */
 void print_line(const char *name, const char *id, const int grade_ex, const int grade_hf, const int grade_sum, const uint8_t is_file, FILE **file)
 {
     if (!is_file)
@@ -15,7 +26,15 @@ void print_line(const char *name, const char *id, const int grade_ex, const int 
     return;
 }
 
-// read a file, return > 0 success means count of line / return < 0 means fail with reason output
+/**
+ * @brief Reads student information from a file.
+ *
+ * This function reads student information from the specified file and stores it in the `Stu` parameter.
+ *
+ * @param filename The name of the file to read from.
+ * @param Stu A pointer to a pointer to the `Student` structure where the student information will be stored.
+ * @return Returns > 0 if the operation is successful, otherwise returns a less-zero value.
+ */
 int ReadStudentInfo(const char *filename, Student **Stu)
 {
     FILE *file = NULL;
@@ -96,6 +115,21 @@ int ReadStudentInfo(const char *filename, Student **Stu)
     return num_count;
 }
 
+/**
+ * Writes the class information to a file.
+ *
+ * This function takes in the student information, class name, average grade,
+ * filename, and a flag indicating whether detailed information is needed.
+ * It writes the class information to the specified file.
+ *
+ * @param Stu Pointer to an array of Student structures containing student information.
+ * @param Stu_num Number of students in the class.
+ * @param class_name Name of the class.
+ * @param average Average grade of the class.
+ * @param filename Name of the file to write the class information to.
+ * @param need_detail Flag indicating whether detailed information is needed (1 for yes, 0 for no).
+ * @return Returns 0 on success, -1 on failure.
+ */
 int WriteClassInfo(const Student *Stu, const uint32_t Stu_num, const char *class_name, const float average, const char *filename, int8_t need_detail)
 {
     FILE *file = NULL;
