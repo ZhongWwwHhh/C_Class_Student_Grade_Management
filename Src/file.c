@@ -108,7 +108,7 @@ int WriteClassInfo(const Student *Stu, const uint32_t Stu_num, const char *class
         return -1;
     }
 
-    fprintf(file, "Result of class %s: ", class_name);
+    fprintf(file, "Result of class %.10s: ", class_name);
 
     if (need_detail)
     {
