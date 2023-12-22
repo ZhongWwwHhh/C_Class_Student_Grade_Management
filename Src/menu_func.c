@@ -188,7 +188,7 @@ int menu_count_all(const Student *Stu, const uint32_t Stu_num)
     puts("class_name\t\taverage");
     for (uint8_t i = 0; i < class_num_count; i++)
     {
-        printf("%s\t\t%f\n", class_names[i], averages[i]);
+        printf("%.10s\t\t%f\n", class_names[i], averages[i]);
     }
     puts("----------");
 
