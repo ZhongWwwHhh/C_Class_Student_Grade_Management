@@ -49,6 +49,7 @@ PRINT_MENU_READFILE:
 
         return 0;
     }
+    return -2;
 }
 
 int menu_count_class(const Student *Stu, const uint32_t Stu_num)

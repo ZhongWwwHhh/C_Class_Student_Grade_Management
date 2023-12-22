@@ -44,8 +44,11 @@ PRINT_MENU:
     case 1:
         // read file
         int res = menu_read_file(&Student_Data, &Stu_num);
-        // count data
-        printf("average: %f, all data has been counted\n", Count_grade(&Student_Data, Stu_num));
+        if (0 == res)
+        {
+            // count data
+            printf("average: %f, all data has been counted\n", Count_grade(&Student_Data, Stu_num));
+        }
         goto PRINT_MENU;
         break;
 
