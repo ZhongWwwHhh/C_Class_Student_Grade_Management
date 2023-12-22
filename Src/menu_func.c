@@ -114,13 +114,14 @@ int menu_count_all(const Student *Stu, const uint32_t Stu_num)
     uint8_t class_num_count = 0;
     for (uint32_t i = 0; i < Stu_num; i++)
     {
-        for (uint16_t j = 0; j < 256; j++)
+        for (uint16_t j = 0; class_names[j][0] != 0; j++)
         {
             if (strncmp(Stu[i].id, class_names[j], 10) == 0)
             {
                 is_same = 1;
             }
         }
+        // find a different class
         if (!is_same)
         {
             for (uint8_t k = 0; k < 16; k++)
@@ -128,13 +129,15 @@ int menu_count_all(const Student *Stu, const uint32_t Stu_num)
                 class_names[class_num_count][k] = Stu[i].id[k];
             }
             class_num_count++;
+            // too many class
             if (class_num_count == 255)
             {
                 // print error
-                puts(CLOUR_ON "TOO MANY CLASS" CLOUR_OFF);
+                puts(CLOUR_ON "TOO MANY CLASS\nYOU HAVE TO QUIT" CLOUR_OFF);
                 return -1;
             }
         }
+        is_same = 0;
     }
 
     // record average for each class

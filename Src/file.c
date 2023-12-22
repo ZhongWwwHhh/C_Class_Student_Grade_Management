@@ -116,12 +116,12 @@ int WriteClassInfo(const Student *Stu, const uint32_t Stu_num, const char *class
         {
             print_line(Stu[i].name, Stu[i].id, Stu[i].grade_hf, Stu[i].grade_ex, Stu[i].grade_sum, 1, &file);
         }
-        fputs("----------", file);
+        fputs("----------\n", file);
     }
 
     fprintf(file, "average grade: %.4f", average);
 
-    fputs("\n", file);
+    fputs("\n\n", file);
 
     fclose(file);
 
