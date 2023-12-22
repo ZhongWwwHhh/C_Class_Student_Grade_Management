@@ -37,7 +37,7 @@ int ReadStudentInfo(const char *filename, Student **Stu)
     // first reading, get num_count, check
     for (; num_count < 10240; num_count++)
     {
-        int res = fscanf(file, "%s %s %d %d %d", (*Stu)->name, (*Stu)->id, &(*Stu)->grade_hf, &(*Stu)->grade_ex, &(*Stu)->grade_sum);
+        int res = fscanf_s(file, "%s %s %d %d %d", (*Stu)->name, sizeof((*Stu)->name), (*Stu)->id, sizeof((*Stu)->id), &(*Stu)->grade_hf, &(*Stu)->grade_ex, &(*Stu)->grade_sum);
 
         // imnormal line
         if (5 != res)
@@ -82,10 +82,11 @@ int ReadStudentInfo(const char *filename, Student **Stu)
     // second reading, get value
     for (int i = 0; i < num_count; i++)
     {
-        fscanf(file, "%s %s %d %d %d",
-               (*Stu)[i].name, (*Stu)[i].id,
-               &(*Stu)[i].grade_ex, &(*Stu)[i].grade_hf,
-               &(*Stu)[i].grade_sum);
+        fscanf_s(file, "%s %s %d %d %d",
+                 (*Stu)[i].name, sizeof((*Stu)[i].name),
+                 (*Stu)[i].id, sizeof((*Stu)[i].id),
+                 &(*Stu)[i].grade_ex, &(*Stu)[i].grade_hf,
+                 &(*Stu)[i].grade_sum);
         print_line((*Stu)[i].name, (*Stu)[i].id, (*Stu)[i].grade_ex, (*Stu)[i].grade_hf, (*Stu)[i].grade_sum, 0, NULL);
     }
 

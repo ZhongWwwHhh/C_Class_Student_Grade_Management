@@ -93,8 +93,8 @@ int menu_count_class(const Student *Stu, const uint32_t Stu_num)
 
     // write result
     char filename[256] = {0};
-    strcat(filename, class_name);
-    strcat(filename, ".txt");
+    strcat_s(filename, sizeof(filename), class_name);
+    strcat_s(filename, sizeof(filename), ".txt");
     if (0 > WriteClassInfo(Stu_temp, (uint32_t)class_num, class_name, average, filename, 1))
     {
         return -3;
