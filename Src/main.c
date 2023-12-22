@@ -36,6 +36,8 @@ PRINT_MENU:
     if (1 != scanf_s("%d", &choose))
     {
         puts(ERROR_INPUT);
+        while (getchar() != '\n')
+            ;
         goto PRINT_MENU;
     }
 
@@ -71,6 +73,8 @@ PRINT_MENU:
 
     default:
         // error
+        while (getchar() != '\n')
+            ;
         goto PRINT_MENU;
         break;
     }
